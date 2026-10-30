@@ -8,7 +8,8 @@
 
 - 分析参考片，区分实际观察与设计建议。
 - 挑选素材、安排音乐锚点、变速、转场、文字与声音处理。
-- 提供八种风格及各自可独立复制的完整 prompt，附实测节奏基准。
+- 按击杀单元剪：单杀一杀一剪、连杀连贯、残局保留过程。
+- 提供十种风格及各自可独立复制的完整 prompt，附实测节奏基准。
 - 自带 `scripts/analyze_montage.py`，用 ffmpeg 测参考片或成片的剪点、镜头长度、闪白和响度。
 - 在 Agent 已具备剪辑工具时指导制作、预览和验收。
 
@@ -22,6 +23,8 @@
 | 歌词排版 edit | 一词一镜，大字被手臂/枪遮挡（TikTok 流行做法） |
 | 击杀反馈卡点 | 15–30 秒，击杀图标和音效当节拍 |
 | 整活梗向 | 保留 HUD，标注与定格制造笑点 |
+| 整回合叙事 | 残局、连杀整段不切，回合交接对拍（Esdeath 系列） |
+| 枪法实录 | 长回合与副歌一杀一剪交替，几乎不调色（Winter 系列） |
 
 ## 安装到 Codex
 
@@ -47,14 +50,15 @@ git clone https://github.com/blacksheep81/valorant-montage-director.git ~/.codex
 ## 文件
 
 - [SKILL.md](SKILL.md)：Agent 工作流与验收要求。
-- [五套风格与完整 Prompt](references/styles-and-prompts.md)。
-- [参考片实测记录](references/reference-videos.md)：13 条 B站 / TikTok 作品（含一个 82 集系列）的测量与观察。
+- [十种风格与完整 Prompt](references/styles-and-prompts.md)。
+- [击杀单元](references/kill-units.md)：一杀一剪、连杀连贯、残局过程、过渡镜头的判定和剪法。
+- [参考片实测记录](references/reference-videos.md)：B站 / TikTok 单条作品与三个 B 站系列的测量与观察。
 - [scripts/analyze_montage.py](scripts/analyze_montage.py)：节奏分析脚本，只依赖 Python 标准库和 ffmpeg。
 
 ## 当前状态与限制
 
 这是指导型 Skill，不自带视频编辑器、自动击杀识别器或渲染引擎，也不保证任何模型仅凭提示词就能输出视频。实际制作依赖所用 Agent 的视频、音频与剪辑能力。
 
-2026-10-31 实际播放并逐帧采样了 11 条参考（B站 7 条、TikTok 4 条），风格已按实测修订，证据等级见参考记录。抖音因需登录尚未实测；TikTok 音轨未取得，只有画面数据。R&B 律动目前没有对应的实测参考。尚未以真实素材完成端到端剪辑验证。
+2026-10-31 实际播放并逐帧采样了 11 条参考（B站 7 条、TikTok 4 条），风格已按实测修订，证据等级见参考记录。之后补测了 Esdeath、Winter 两个 B 站系列各 2 集，据此加入击杀单元规则和两种新风格。抖音因需登录尚未实测；TikTok 音轨未取得，只有画面数据。R&B 律动目前没有对应的实测参考。尚未以真实素材完成端到端剪辑验证。
 
 仓库仅提供原创工作流、提示词和参考链接，不包含第三方视频或音乐。使用素材时需具备相应权限。本项目与 Riot Games 无隶属关系。
