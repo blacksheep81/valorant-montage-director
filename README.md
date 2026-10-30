@@ -48,7 +48,7 @@ git clone https://github.com/blacksheep81/valorant-montage-director.git ~/.codex
 
 - [SKILL.md](SKILL.md)：Agent 工作流与验收要求。
 - [五套风格与完整 Prompt](references/styles-and-prompts.md)。
-- [参考片实测记录](references/reference-videos.md)：11 条 B站 / TikTok 作品的测量与观察。
+- [参考片实测记录](references/reference-videos.md)：13 条 B站 / TikTok 作品（含一个 82 集系列）的测量与观察。
 - [scripts/analyze_montage.py](scripts/analyze_montage.py)：节奏分析脚本，只依赖 Python 标准库和 ffmpeg。
 
 ## 当前状态与限制

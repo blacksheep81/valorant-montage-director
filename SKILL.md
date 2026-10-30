@@ -17,7 +17,7 @@ description: 为普通玩家的 Valorant/无畏契约素材设计短篇炫酷 mo
 
 ## 参考片分析
 
-涉及参考片、节奏密度或复刻某种风格时，先读 [references/reference-videos.md](references/reference-videos.md)，里面有 11 条 B站 / TikTok 作品的实测数据和证据等级。选择风格或生成提示词时，读 [references/styles-and-prompts.md](references/styles-and-prompts.md)。
+涉及参考片、节奏密度或复刻某种风格时，先读 [references/reference-videos.md](references/reference-videos.md)，里面有 13 条 B站 / TikTok 作品（含一个 82 集系列）的实测数据和证据等级。选择风格或生成提示词时，读 [references/styles-and-prompts.md](references/styles-and-prompts.md)。
 
 能读取本地文件且有 ffmpeg 时，用 `python scripts/analyze_montage.py 文件.mp4` 测剪点、镜头长度、闪白、色彩和响度；它也可以用来验收成片节奏。叠化和画中画切换会漏检，原始录屏里的快速甩枪会被误判成剪点，结果需要配合看画面。
 
