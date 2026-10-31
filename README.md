@@ -54,6 +54,7 @@ git clone https://github.com/blacksheep81/valorant-montage-director.git ~/.codex
 - [SKILL.md](SKILL.md)：Agent 工作流与验收要求。
 - [十一种风格与完整 Prompt](references/styles-and-prompts.md)。
 - [剪辑模式](references/edit-modes.md)：一枪一剪卡点与流畅长镜头的选择和具体剪法。
+- [声音比例与响度](references/audio-mix.md)：游戏声与 BGM 的比例、逐段统一音量、交付响度。
 - [参考片实测记录](references/reference-videos.md)：B站 / TikTok 单条作品、三个 B 站系列和一个抖音系列的测量与观察。
 - [scripts/analyze_montage.py](scripts/analyze_montage.py)：节奏分析脚本，只依赖 Python 标准库和 ffmpeg。
 - [scripts/kill_times.py](scripts/kill_times.py)：击杀图标拼图与帧级击杀时间，只依赖 Python 标准库和 ffmpeg。
