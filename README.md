@@ -11,6 +11,7 @@
 - 选素材时定下整片剪辑模式：一枪一剪卡点（S），或流畅长镜头（F，同回合 5 秒内保留、超过就切）。
 - 提供十种风格及各自可独立复制的完整 prompt，附实测节奏基准。
 - 自带 `scripts/analyze_montage.py`，用 ffmpeg 测参考片或成片的剪点、镜头长度、闪白和响度。
+- 自带 `scripts/kill_times.py`，从击杀图标和开枪声找准击杀时刻，用来卡点。
 - 在 Agent 已具备剪辑工具时指导制作、预览和验收。
 
 | 风格 | 表现方向 |
@@ -54,11 +55,12 @@ git clone https://github.com/blacksheep81/valorant-montage-director.git ~/.codex
 - [剪辑模式](references/edit-modes.md)：一枪一剪卡点与流畅长镜头的选择和具体剪法。
 - [参考片实测记录](references/reference-videos.md)：B站 / TikTok 单条作品与三个 B 站系列的测量与观察。
 - [scripts/analyze_montage.py](scripts/analyze_montage.py)：节奏分析脚本，只依赖 Python 标准库和 ffmpeg。
+- [scripts/kill_times.py](scripts/kill_times.py)：击杀图标拼图与帧级击杀时间，只依赖 Python 标准库和 ffmpeg。
 
 ## 当前状态与限制
 
-这是指导型 Skill，不自带视频编辑器、自动击杀识别器或渲染引擎，也不保证任何模型仅凭提示词就能输出视频。实际制作依赖所用 Agent 的视频、音频与剪辑能力。
+这是指导型 Skill，不自带视频编辑器或渲染引擎（击杀时间脚本是半自动的，需要人看拼图确认），也不保证任何模型仅凭提示词就能输出视频。实际制作依赖所用 Agent 的视频、音频与剪辑能力。
 
-2026-10-31 实际播放并逐帧采样了 11 条参考（B站 7 条、TikTok 4 条），风格已按实测修订，证据等级见参考记录。之后补测了 Esdeath、Winter 两个 B 站系列各 2 集，之后又测了 B 站与 TikTok 的高播放一枪一剪和残局作品，整理成两种剪辑模式。B 站参考改用 yt-dlp + ffmpeg 离线测量。抖音因需登录尚未实测；R&B 律动目前没有对应的实测参考。尚未以真实素材完成端到端剪辑验证。
+2026-10-31 实际播放并逐帧采样了 11 条参考（B站 7 条、TikTok 4 条），风格已按实测修订，证据等级见参考记录。之后补测了 Esdeath、Winter 两个 B 站系列各 2 集，之后又测了 B 站与 TikTok 的高播放一枪一剪和残局作品，整理成两种剪辑模式。B 站参考改用 yt-dlp + ffmpeg 离线测量。抖音因需登录尚未实测；R&B 律动目前没有对应的实测参考。已用真实素材完成一次 F 模式的端到端剪辑：9 个残局/ACE 片段，配一首 140 BPM 的歌，31 杀中有 21 杀落在拍子 40 毫秒内，用户确认卡点感觉对；S 模式尚未用真实素材验证。
 
 仓库仅提供原创工作流、提示词和参考链接，不包含第三方视频或音乐。使用素材时需具备相应权限。本项目与 Riot Games 无隶属关系。
