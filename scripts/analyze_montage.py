@@ -12,6 +12,7 @@ import array
 import json
 import math
 import shutil
+from statistics import median
 import subprocess
 import sys
 
@@ -77,14 +78,16 @@ def audio_profile(ffmpeg, path):
         mean = sum(flux[lo:hi]) / (hi - lo)
         if flux[i] > mean * 4 and flux[i] >= flux[i - 1] and flux[i] >= flux[i + 1] and flux[i] > 0.01:
             onsets.append(round(i * HOP, 2))
-    best, lag_best = 0.0, 0
-    for lag in range(17, 51):  # 约 60–176 BPM
-        s = sum(flux[i] * flux[i - lag] for i in range(lag, n))
-        if s > best:
-            best, lag_best = s, lag
+    intervals = [b - a for a, b in zip(onsets, onsets[1:])]
+    bpm = None
+    if len(intervals) >= 3:
+        period = median(intervals)
+        regular = sum(abs(gap - period) <= period * 0.12 for gap in intervals)
+        if 0.34 <= period <= 1.0 and regular >= 0.75 * len(intervals):
+            bpm = round(60 / period, 1)
     step = int(2 / HOP)
     loud2s = [round(1000 * sum(rms[i:i + step]) / max(1, len(rms[i:i + step]))) for i in range(0, n, step)]
-    return {"bpm_rough": round(60 / (lag_best * HOP), 1) if lag_best else None,
+    return {"bpm_rough": bpm,
             "onsets": onsets, "loudness_per_2s": loud2s}
 
 

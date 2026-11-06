@@ -57,7 +57,8 @@ git clone https://github.com/blacksheep81/valorant-montage-director.git ~/.codex
 - [声音比例与响度](references/audio-mix.md)：游戏声与 BGM 的比例、逐段统一音量、交付响度。
 - [参考片实测记录](references/reference-videos.md)：B站 / TikTok 单条作品、三个 B 站系列和一个抖音系列的测量与观察。
 - [scripts/analyze_montage.py](scripts/analyze_montage.py)：节奏分析脚本，只依赖 Python 标准库和 ffmpeg。
-- [scripts/kill_times.py](scripts/kill_times.py)：击杀图标拼图与帧级击杀时间，只依赖 Python 标准库和 ffmpeg。
+- [scripts/kill_times.py](scripts/kill_times.py)：击杀图标拼图与帧级击杀时间，只依赖 Python 标准库和 ffmpeg。缺少 drawtext 时输出无字拼图，按输出提示用行列换算时间。
+- 节拍估计依赖足够且规律的音频起音。JSON 中 `bpm_rough: null` 表示无法可靠估计。混合音轨上的估计仍需对照音乐试听。
 
 ## 当前状态与限制
 

@@ -36,14 +36,20 @@ def sheet(ff, path, out, ss, t, box):
         hms = probe.split("Duration: ")[1].split(",")[0].split(":")
         dur = float(hms[0]) * 3600 + float(hms[1]) * 60 + float(hms[2]) - ss
     rows = max(1, math.ceil(dur * 4 / 17))
-    vf = (f"fps=4,{crop_expr(box)},scale=160:-2,"
-          "drawtext=text='%{pts\\:flt}':x=2:y=2:fontsize=14:fontcolor=yellow:box=1:boxcolor=black@0.7,"
-          f"tile=17x{rows}")
+    filters = subprocess.run([ff, "-hide_banner", "-filters"], capture_output=True, text=True, check=True).stdout
+    labeled = any(len(fields) > 1 and fields[1] == "drawtext" for fields in map(str.split, filters.splitlines()))
+    vf = f"fps=4,{crop_expr(box)},scale=160:-2,"
+    if labeled:
+        vf += "drawtext=text='%{pts\\:flt}':x=2:y=2:fontsize=14:fontcolor=yellow:box=1:boxcolor=black@0.7,"
+    vf += f"tile=17x{rows}"
     cmd = [ff, "-v", "error", "-y", "-ss", str(ss), "-i", path]
     if t is not None:
         cmd += ["-t", str(t)]
     subprocess.run(cmd + ["-vf", vf, "-frames:v", "1", out], check=True)
-    print(f"{out}：时间码从 {ss} 秒起算，读到的时刻要加回 {ss}")
+    if labeled:
+        print(f"{out}：时间码从 {ss} 秒起算，读到的时刻要加回 {ss}")
+    else:
+        print(f"{out}：FFmpeg 缺少 drawtext，已输出无字拼图。行列从 1 数，时间约为 {ss} + ((行-1)*17 + 列-1)/4 秒；忽略末尾填充格。")
 
 
 def visual_time(ff, path, rough, box, fps=60, w=32, h=24):
