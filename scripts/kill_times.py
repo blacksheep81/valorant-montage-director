@@ -52,7 +52,8 @@ def sheet(ff, path, out, ss, t, box):
         print(f"{out}：FFmpeg 缺少 drawtext，已输出无字拼图。行列从 1 数，时间约为 {ss} + ((行-1)*17 + 列-1)/4 秒；忽略末尾填充格。")
 
 
-def visual_time(ff, path, rough, box, fps=60, w=32, h=24):
+def visual_time(ff, path, rough, box):
+    fps, w, h = 60, 32, 24
     a = max(0.0, rough - 0.45)
     raw = subprocess.run([ff, "-v", "error", "-ss", f"{a:.3f}", "-i", path, "-t", "0.75",
                           "-vf", f"fps={fps},{crop_expr(box)},scale={w}:{h},format=gray", "-f", "rawvideo", "-"],
@@ -109,7 +110,8 @@ def main():
         res.append({"rough": r, "icon": round(v, 3), "sound": round(au, 3) if au is not None else None})
     text = json.dumps(res, ensure_ascii=False, indent=1)
     if args.out:
-        open(args.out, "w", encoding="utf-8").write(text)
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(text)
     print(text)
 
 

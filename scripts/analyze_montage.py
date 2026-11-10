@@ -100,17 +100,11 @@ def summarize(rows, audio):
             cuts.append(round(rows[i][0], 2))
         if rows[i][1] - rows[i - 1][1] > 45:
             flashes.append(round(rows[i][0], 2))
-    shots, last = [], 0.0
-    for c in cuts + [dur]:
-        shots.append(c - last)
-        last = c
-    srt = sorted(shots)
+    bounds = [0.0] + cuts + [dur]
+    shots = [(start, end - start) for start, end in zip(bounds, bounds[1:])]
+    srt = sorted(length for _, length in shots)
     pct = lambda q: round(srt[min(len(srt) - 1, int(len(srt) * q))], 2) if srt else None
-    long_shots, last = [], 0.0
-    for c in cuts + [dur]:
-        if c - last > 4:
-            long_shots.append([round(last, 1), round(c - last, 1)])
-        last = c
+    long_shots = [[round(start, 1), round(length, 1)] for start, length in shots if length > 4]
     seg_len = 15 if dur > 90 else 5
     segments = []
     t = 0.0
